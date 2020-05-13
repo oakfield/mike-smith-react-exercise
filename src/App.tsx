@@ -1,8 +1,31 @@
 import './App.css';
 
-import React from 'react';
+import React, { useState } from 'react';
 
-let App = () => (
+type MemberOfCongress = {
+  district: string,
+  name: string,
+  office: string,
+  party: string,
+  phone: string
+}
+
+const REPRESENTATIVES = 'representatives';
+const SENATE = 'senators';
+
+let App = () => {
+  const [house, setHouse] = useState(REPRESENTATIVES);
+  const [state, setState] = useState('UT');
+  const [membersOfCongress, setMembersOfCongress] = useState<MemberOfCongress[]>([]);
+  const [selectedMemberOfCongress, setSelectedMemberOfCongress] = useState<MemberOfCongress | null>(null);
+
+  let getRepresentatives = async () => {
+    let representativesResponse = await fetch(`http://localhost:3000/${house}/${state}`);
+    let representativesJson = await representativesResponse.json();
+    setMembersOfCongress(representativesJson.results);
+  };
+
+  return (
   <div className="app">
     <header className="app-header">
       <h1>
@@ -13,14 +36,14 @@ let App = () => (
       <h2>Search</h2>
       <label>
         House
-        <select>
-          <option>House of Representatives</option>
-          <option>Senate</option>
+        <select value={house} onChange={event => setHouse(event.target.value)}>
+          <option value={REPRESENTATIVES}>House of Representatives</option>
+          <option value={SENATE}>Senate</option>
         </select>
       </label>
       <label>
         State
-        <select>
+        <select value={state} onChange={event => setState(event.target.value)}>
           <option>AL</option>
           <option>AK</option>
           <option>AZ</option>
@@ -73,15 +96,15 @@ let App = () => (
           <option>WY</option>
         </select>
       </label>
-      <button>Submit</button>
+      <button onClick={getRepresentatives}>Submit</button>
     </section>
     <section className="info">
       <h2>Info</h2>
-      <input aria-label="First Name" placeholder="First Name" />
-      <input aria-label="Last Name" placeholder="Last Name" />
-      <input aria-label="District" placeholder="District" />
-      <input aria-label="Phone" placeholder="Phone" />
-      <input aria-label="Office" placeholder="Office" />
+      <div className="moc-info">{selectedMemberOfCongress && selectedMemberOfCongress.name.split(' ')[0] || 'First Name'}</div>
+      <div className="moc-info">{selectedMemberOfCongress && selectedMemberOfCongress.name.split(' ')[1] || 'Last Name'}</div>
+      <div className="moc-info">{selectedMemberOfCongress && selectedMemberOfCongress.district || 'District'}</div>
+      <div className="moc-info">{selectedMemberOfCongress && selectedMemberOfCongress.phone || 'Phone'}</div>
+      <div className="moc-info">{selectedMemberOfCongress && selectedMemberOfCongress.office || 'Office'}</div>
     </section>
     <section className="results">
       <h2>List / Representatives</h2>
@@ -92,9 +115,20 @@ let App = () => (
             <th className="results-party">Party</th>
           </tr>
         </thead>
+        <tbody>
+          {membersOfCongress.map((memberOfCongress, index) => {
+            return (
+              <tr key={index} onClick={() => setSelectedMemberOfCongress(memberOfCongress)}>
+                <td className="results-name">{memberOfCongress.name}</td>
+                <td className="results-party">{memberOfCongress.party}</td>
+              </tr>
+            );
+          })
+          }
+        </tbody>
       </table>
     </section>
   </div>
-);
+)};
 
 export default App;

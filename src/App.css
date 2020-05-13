@@ -42,16 +42,17 @@ h1 {
   align-self: flex-start;
 }
 
-.info input:not(:last-child) {
+.info .moc-info:not(:last-child) {
   margin-bottom: 1em;
 }
 
-input {
+.moc-info {
   color: #A7A2A2;
   padding: 1em;
+  text-align: left;
 }
 
-input, select {
+.moc-info, select {
   background-color: #F4F4F5;
   border: none;
   border-radius: 5px;
@@ -76,6 +77,12 @@ label {
 
 .results .results-name {
   width: 75%;
+}
+
+.results .results-name, .results .results-party {
+  border-bottom: 1px solid #F4F4F5;
+  padding: 0.5em 1em;
+  text-align: left;
 }
 
 .results .results-party {
