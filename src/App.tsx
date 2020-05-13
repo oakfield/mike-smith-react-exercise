@@ -88,8 +88,8 @@ let App = () => (
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Party</th>
+            <th className="results-name">Name</th>
+            <th className="results-party">Party</th>
           </tr>
         </thead>
       </table>
