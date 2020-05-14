@@ -56,7 +56,7 @@ h1 {
   text-align: left;
 }
 
-.moc-info, select {
+.moc-info {
   background-color: #F4F4F5;
   border: none;
   border-radius: 5px;
@@ -77,6 +77,11 @@ label {
 
 .results h2 {
   align-self: flex-start;
+}
+
+.results .results-body {
+  max-height: 50vh;
+  overflow: auto;
 }
 
 .results .results-name {
@@ -109,6 +114,12 @@ label {
   display: flex;
 }
 
+.results tbody tr:hover, .results tbody tr:focus {
+  background-color: #5AB5F1;
+  color: white;
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
 .search {
   align-items: center;
   display: grid;
@@ -126,6 +137,11 @@ label {
   height: 2rem;
   justify-self: end;
   width: 10rem;
+}
+
+.search button:hover, .search button:focus {
+  background-color: #5AB5F1;
+  transition: background-color 300ms ease;
 }
 
 .search h2 {

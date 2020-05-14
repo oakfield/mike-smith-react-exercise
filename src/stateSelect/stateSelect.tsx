@@ -1,8 +1,10 @@
+import './StateSelect.css';
+
 import React from 'react';
 
 let StateSelect = ({ value, onChange}: { value: string, onChange: (value: string) => void }) => {
   return (
-    <label>
+    <label className="stateSelect">
       State
       <select value={value} onChange={event => onChange(event.target.value)}>
         <option>AL</option>

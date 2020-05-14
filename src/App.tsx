@@ -1,9 +1,9 @@
 import './App.css';
 
-import HouseSelect, { REPRESENTATIVES } from './houseSelect/houseSelect';
+import HouseSelect, { REPRESENTATIVES } from './houseSelect/HouseSelect';
 import React, { useState } from 'react';
 
-import StateSelect from './stateSelect/stateSelect';
+import StateSelect from './stateSelect/StateSelect';
 import getMembersOfCongress from './membersOfCongressService/membersOfCongressService';
 
 let App = () => {
@@ -40,23 +40,25 @@ let App = () => {
           List&nbsp;/&nbsp;
           <span className="house">{house === REPRESENTATIVES ? 'Representatives' : 'Senators'}</span>
         </h2>
-        <table>
-          <thead>
-            <tr>
-              <th className="results-name">Name</th>
-              <th className="results-party">Party</th>
-            </tr>
-          </thead>
-          <tbody>
-            {membersOfCongress.map(memberOfCongress => (
-              <tr key={memberOfCongress.name} onClick={() => setSelectedMemberOfCongress(memberOfCongress)}>
-                <td className="results-name">{memberOfCongress.name}</td>
-                <td className="results-party">{memberOfCongress.party}</td>
+        <div className="results-body">
+          <table>
+            <thead>
+              <tr>
+                <th className="results-name">Name</th>
+                <th className="results-party">Party</th>
               </tr>
-            ))
-            }
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {membersOfCongress.map(memberOfCongress => (
+                <tr key={memberOfCongress.name} onClick={() => setSelectedMemberOfCongress(memberOfCongress)}>
+                  <td className="results-name">{memberOfCongress.name}</td>
+                  <td className="results-party">{memberOfCongress.party}</td>
+                </tr>
+              ))
+              }
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
   )
