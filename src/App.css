@@ -33,6 +33,10 @@ h1 {
   font-size: 24px;
 }
 
+.house {
+  color: #3BA8EF;
+}
+
 .info {
   display: flex;
   flex-direction: column;
