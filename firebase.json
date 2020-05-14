@@ -7,7 +7,7 @@
       "**/node_modules/**"
     ],
     "headers": [ {
-      "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css|js)",
+      "source": "**/*",
       "headers": [ {
         "key": "Access-Control-Allow-Origin",
         "value": "*"
