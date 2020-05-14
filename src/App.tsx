@@ -17,7 +17,8 @@ let App = () => {
     try {
       setMembersOfCongress(await getMembersOfCongress(house, state));
       setShowErrorMessage(false);
-    } catch {
+    } catch (error) {
+      console.log(error);
       setShowErrorMessage(true);
     }
   };
