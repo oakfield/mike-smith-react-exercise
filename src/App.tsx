@@ -11,9 +11,15 @@ let App = () => {
   const [state, setState] = useState('UT');
   const [membersOfCongress, setMembersOfCongress] = useState<MemberOfCongress[]>([]);
   const [selectedMemberOfCongress, setSelectedMemberOfCongress] = useState<MemberOfCongress | null>(null);
+  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
 
   let handleSubmit = async () => {
-    setMembersOfCongress(await getMembersOfCongress(house, state));
+    try {
+      setMembersOfCongress(await getMembersOfCongress(house, state));
+      setShowErrorMessage(false);
+    } catch {
+      setShowErrorMessage(true);
+    }
   };
 
   return (
@@ -26,6 +32,9 @@ let App = () => {
         <HouseSelect value={house} onChange={setHouse} />
         <StateSelect value={state} onChange={setState} />
         <button onClick={handleSubmit}>Submit</button>
+        {showErrorMessage && (
+          <div>Oops! Something went wrong. Try again later.</div>
+        )}
       </section>
       <section className="info">
         <h2>Info</h2>
